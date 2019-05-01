@@ -1,28 +1,16 @@
-import clr
+
 try:
     import clr
     clr.AddReference("Interop.SolidEdge")
     clr.AddReference("System.Runtime.InteropServices")
-    solidEnvinstalled=True
-except:
-    print "Solidedge not installed"
-
-objApp = None
-objDocs = None
-objDoc  = None
-
-if solidEnvinstalled:
-    import SolidEdgeDraft as SEDraft
-    import SolidEdgeFramework as SEFramework
-    import SolidEdgeFrameworkSupport as SEFrameworkSupport
-    import SolidEdgeConstants as SEConstants
-    import SolidEdgeAssembly as SEAssembly
-
     import System.Runtime.InteropServices as SRI
-    try:
-        import SolidEdgeFramework.ISEApplicationEvents_Event as SEEvents
-    except:
-        print "no evensts handling"
+    
+except Exception as e:
+    print "Solidedge not installed or DLL not found"
+    print e
+    
+objApp = None
+objDoc  = None
 
 def checkForSE():
     global objApp
@@ -35,7 +23,6 @@ def checkForSE():
         exit()
 
 if __name__ == "__main__":
-  global objApp
   checkForSE()
   
   if objApp != None:
